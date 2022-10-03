@@ -1,12 +1,25 @@
-export const ContactList = ({ arrayOfContacts }) => {
+import { Button, Item, List } from "components/ContactList/ContactList.styled";
+import { Filter } from "../Filter/Filter";
+import PropTypes from 'prop-types';
+
+export const ContactList = ({ arrayOfContacts, title, onSaveFilterValue, deleteContact}) => {
   return (
 
     <>
-    <ul>
+    <h2>{title}</h2>
+    <Filter onSaveFilterValue={onSaveFilterValue}/>
+    <List>
       {arrayOfContacts.map(contact => (
-        <li>{contact.name}</li>
+        <Item key={contact.id}>{contact.name}: {contact.number} <Button type="button" onClick={() => deleteContact(contact.id)}>Delete</Button></Item>
       ))}  
-    </ul>
+    </List>
     </>
   )
+}
+
+ContactList.propTypes = {
+  arrayOfContacts: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired, 
+  onSaveFilterValue: PropTypes.func.isRequired,
+  deleteContact: PropTypes.func.isRequired,
 }
