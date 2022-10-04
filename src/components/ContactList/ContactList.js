@@ -2,7 +2,7 @@ import { Button, Item, List } from "components/ContactList/ContactList.styled";
 import { Filter } from "../Filter/Filter";
 import PropTypes from 'prop-types';
 
-export const ContactList = ({ arrayOfContacts, title, onSaveFilterValue, deleteContact}) => {
+export const ContactList = ({value, arrayOfContacts, title, onSaveFilterValue, deleteContact}) => {
   return (
 
     <>
@@ -18,6 +18,7 @@ export const ContactList = ({ arrayOfContacts, title, onSaveFilterValue, deleteC
 }
 
 ContactList.propTypes = {
+  value: PropTypes.string,
   arrayOfContacts: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired, 
   onSaveFilterValue: PropTypes.func.isRequired,

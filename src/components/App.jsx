@@ -61,7 +61,7 @@ export class App extends Component {
         <h1>Phonebook</h1>
       <ContactForm onSaveContact={this.saveContact} />
      
-      <ContactList arrayOfContacts={this.filtredContacts()} title='Contacts' onSaveFilterValue={this.saveFilterValue} deleteContact={this.deleteContact}/>
+      <ContactList value={this.state.filter} arrayOfContacts={this.filtredContacts()} title='Contacts' onSaveFilterValue={this.saveFilterValue} deleteContact={this.deleteContact}/>
       </div>
     );
   }
