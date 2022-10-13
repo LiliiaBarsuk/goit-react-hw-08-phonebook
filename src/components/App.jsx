@@ -23,7 +23,7 @@ export const App = () => {
        return alert(`${newContact.name} is already in contacts`);   
     }
 
-    setContacts([...contacts, contact])
+    setContacts(prevState => [...prevState, contact])
 
   }
   
