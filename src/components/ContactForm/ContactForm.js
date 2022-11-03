@@ -1,7 +1,9 @@
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { Button, FormStyled, Label,  FieldStyled,  ErrorMessageStyled } from './ContactForm.styled';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from "react-redux";
+import { addContact } from "../../redux/contactsSlise";
+import { getContacts } from 'redux/selectors';
 
 
 const schema = yup.object().shape({
@@ -22,9 +24,19 @@ const initialValues = {
     number: '',
   }
   
-export const ContactForm = ({ onSaveContact }) => {
-  const handleSubmit = (values, {resetForm}) => {   
-    onSaveContact(values);
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts)
+
+  const handleSubmit = (values, {resetForm}) => {
+    const newName = values.name.toLowerCase();
+    const nameExist = contacts.map(contact => contact.name.toLowerCase()).some(el => el === newName);
+
+    if (nameExist) {
+       return alert(`${values.name} is already in contacts`);   
+    }
+    
+    dispatch(addContact(values));
     resetForm()
   };
 
@@ -50,6 +62,3 @@ export const ContactForm = ({ onSaveContact }) => {
 
 }
 
-ContactForm.propTypes = {
-  onSaveContact: PropTypes.func.isRequired,
-}
