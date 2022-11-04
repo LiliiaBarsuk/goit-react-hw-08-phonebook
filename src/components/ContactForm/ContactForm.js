@@ -2,7 +2,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { Button, FormStyled, Label,  FieldStyled,  ErrorMessageStyled } from './ContactForm.styled';
 import { useDispatch, useSelector } from "react-redux";
-import { addContact } from "../../redux/contactsSlise";
+import { addContact } from "../../redux/contactsSlice";
 import { getContacts } from 'redux/selectors';
 
 

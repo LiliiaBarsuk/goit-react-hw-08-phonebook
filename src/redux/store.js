@@ -7,12 +7,13 @@ import { persistStore, persistReducer,
     PURGE,
     REGISTER, } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { contactsReducer } from "./contactsSlise";
-import { filterReducer } from "./filterSlice";
+import { contactsReducer } from "./contactsSlice";
+import { filterReducer } from "./contactsSlice";
 
 const persistConfig = {
     key: 'contacts',
     storage,
+    whitelist: ['contacts']
 };
 
 
