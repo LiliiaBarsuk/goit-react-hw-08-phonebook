@@ -16,9 +16,9 @@ export const ContactList = () => {
   const contacts = useSelector(getContacts);
 
   const filterValue = useSelector(getFilter);
- console.log(filterValue);
+
   const filteredContacts = getVisibleContacts(contacts, filterValue);
-  console.log(filteredContacts);
+
   function delContact(id) {
     dispatch(deleteContact(id));
   };
