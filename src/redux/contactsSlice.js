@@ -30,7 +30,7 @@ const contactsSlice = createSlice({
         },
         
         deleteContact: (state, action) => {
-          state.contacts.filter(contact => contact.id !== action.payload);
+          return state.contacts.filter(contact => contact.id !== action.payload);
         },
     }
 });
