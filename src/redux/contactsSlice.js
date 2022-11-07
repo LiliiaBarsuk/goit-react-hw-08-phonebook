@@ -3,16 +3,16 @@ import { nanoid } from "nanoid";
 
 const initialState = {
   contacts: [],
-  filter: ""
+  filterValue: "",
 }
 
 const contactsSlice = createSlice({
-    name: 'contacts',
-    initialState: initialState.contacts,
+    name: 'state',
+    initialState: initialState,
     reducers: {
         addContact: {
             reducer(state, action) {
-                state.push(action.payload);
+                state.contacts.push(action.payload);
             },
             prepare(newContact) {
               return {
@@ -24,23 +24,16 @@ const contactsSlice = createSlice({
               };
             },
         },
-        deleteContact(state, action) {
-                return state.filter(contact => contact.id !== action.payload)
-        }
+        
+        setFilter: (state, action) => {
+          state.filterValue = action.payload;
+        },
+        
+        deleteContact: (state, action) => {
+          return state.contacts.filter(contact => contact.id !== action.payload);
+        },
     }
 });
 
-const filterSlice = createSlice({
-    name: "filter",
-    initialState: initialState.filter,
-    reducers: {
-      setFilter(state, action) {
-        return state = action.payload;
-      },
-    },
-});
-
-export const { addContact, deleteContact } = contactsSlice.actions;
+export const { addContact, deleteContact, setFilter } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
-export const { setFilter } = filterSlice.actions;
-export const filterReducer = filterSlice.reducer;

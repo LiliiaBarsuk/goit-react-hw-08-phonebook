@@ -16,9 +16,9 @@ export const ContactList = () => {
   const contacts = useSelector(getContacts);
 
   const filterValue = useSelector(getFilter);
-
-  const filtredContacts = getVisibleContacts(contacts, filterValue);
-  
+ console.log(filterValue);
+  const filteredContacts = getVisibleContacts(contacts, filterValue);
+  console.log(filteredContacts);
   function delContact(id) {
     dispatch(deleteContact(id));
   };
@@ -26,7 +26,7 @@ export const ContactList = () => {
   return (
     <>
     <List>
-      {filtredContacts.map(contact => (
+      {filteredContacts.map(contact => (
         <Item key={contact.id}>
           {contact.name}: {contact.number} 
           <Button type="button" onClick={() => delContact(contact.id)}>
