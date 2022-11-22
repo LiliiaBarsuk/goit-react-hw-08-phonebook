@@ -1,38 +1,59 @@
 import { Routes, Route } from "react-router-dom";
 import { Layout } from "./Layout/Layout";
-import { LogInPage } from "Pages/LoginPage/LogInPage"; 
-import { RegistrationPage } from "Pages/RegistrationPage/RegistrationPage";
-import { ContactsPage } from "Pages/ContactsPage/ContactsPage";
-import { useSelector } from "react-redux";
-import { getError, getIsLoading } from "redux/contacts/selectors";
-import { Home } from "Pages/Home/Home";
-import { ContactDetails } from "Pages/ContactDetails/ContactDetails";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, lazy } from "react";
+import { refreshUser } from "redux/auth/operations";
+import { PublicRoute } from "./PublicRoute";
+import { PrivatRoute } from "./PrivateRoute";
+import { getIsRefreshing } from "redux/auth/selectors";
+import { FallingLines } from "react-loader-spinner";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const Home= lazy(() => import('Pages/Home/Home'));
+const ContactDetails= lazy(() => import('Pages/ContactDetails/ContactDetails'));
+const ContactsPage= lazy(() => import('Pages/ContactsPage/ContactsPage'));
+const RegistrationPage= lazy(() => import('Pages/RegistrationPage/RegistrationPage'));
+const LogInPage= lazy(() => import('Pages/LoginPage/LogInPage'));
 
 export const App = () => {
-  const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(getIsRefreshing);
 
-    return (
-      <div
-        style={{
-          height: '100vh',
-          fontSize: 20,
-          color: '#010101'
-        }}
-      >
-        <Routes>
-          <Route path='/' element={<Layout/>}>
-            <Route index element={<Home />} />
-            <Route path="/login" element={<LogInPage />} />
-            <Route path="/register" element={<RegistrationPage />} />
-            <Route path="/contacts" element={<ContactsPage />} >
-              <Route path=":id" element={<ContactDetails />} />
-            </Route>
+  useEffect(() => {
+    dispatch(refreshUser())
+  }, [dispatch]); 
+
+
+    return <div
+    style={{
+      height: '100vh',
+      fontSize: 20,
+      color: '#010101',
+      textAlign: 'center'
+    }}
+  >
+    
+    {isRefreshing ? (<FallingLines 
+      color="#0824AF"
+      width="100"
+      visible={true}
+      ariaLabel='falling-lines-loading'
+  />) : 
+      <Routes>
+        <Route path='/' element={<Layout/>}>
+          <Route index element={<Home />} />
+          <Route path="/login" element={<PublicRoute  redirectTo="/contacts" component={<LogInPage />} />}/>
+          <Route path="/register" element={<PublicRoute  redirectTo="/contacts" component={<RegistrationPage />} />}/>
+          <Route path="/contacts" element={<PrivatRoute  redirectTo="/login" component={<ContactsPage />} />}>
+            <Route path=":id" element={<PrivatRoute  redirectTo="/login" component={<ContactDetails />} />} />
           </Route>
-        
-      </Routes>
-        
+          <Route path="*" element={<Home />} />  
+        </Route>
       
-      </div>
-    );
+    </Routes>}
+    <ToastContainer />
+    </div>
+      
+  
   }

@@ -1,24 +1,21 @@
-import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { setModal } from "../../redux/contacts/contactsSlice";
 import { createPortal } from "react-dom";
 import { Header, ModalStyled, Overlay } from "./Modal.styled";
 import { ContactForm } from "components/ContactForm/ContactForm";
 
 const modalRoot = document.querySelector('#modal-root');
 
-export const Modal = () => {
-    const dispatch = useDispatch();
+export const Modal = ({ closeModal }) => {
 
     const closeByKeyDown = e => {
         if(e.code === 'Escape') {
-            dispatch(setModal());
+            closeModal(false);
         } 
     }
 
     const closeByClickOnBackdrop = e => {
         if(e.target === e.currentTarget) {
-            dispatch(setModal());
+            closeModal(false);
         }
     }
 
@@ -32,7 +29,7 @@ export const Modal = () => {
             <Overlay onClick={closeByClickOnBackdrop}>
                 <ModalStyled>
                     <Header>Fill the details of the new contact</Header>
-                    <ContactForm />
+                    <ContactForm closeModal={closeModal} />
                 </ModalStyled>
             </Overlay>,
             modalRoot

@@ -1,6 +1,6 @@
 import { HomeContainer, Header } from "./Home.styled"
 
-export const Home = () => {
+const Home = () => {
     return (
         <HomeContainer>
             <Header>Welcome to PhoneBook</Header>
@@ -9,4 +9,6 @@ export const Home = () => {
         
     ) 
     
-}
+};
+
+export default Home;

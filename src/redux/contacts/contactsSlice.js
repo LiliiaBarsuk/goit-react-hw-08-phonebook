@@ -8,7 +8,6 @@ const contactsSlice = createSlice({
         isLoading: false,
         error: null,
         filterValue: "",
-        isModalOpen: false,
         selectedContactId: null,
     },
     reducers: {
@@ -18,9 +17,6 @@ const contactsSlice = createSlice({
       setModal: state => {
         state.isModalOpen = !state.isModalOpen;
       },
-      setSelectedContactId: (state, action) => {
-        state.selectedContactId = action.payload;
-      }
     },
     extraReducers: {
       [fetchContacts.pending](state) {
@@ -69,5 +65,5 @@ const contactsSlice = createSlice({
     
   })
         
-export const { setFilter, setModal, setSelectedContactId } = contactsSlice.actions;
+export const { setFilter, setModal } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;

@@ -4,8 +4,6 @@ import { fetchContacts } from "redux/contacts/operations";
 import { deleteContact } from "../../redux/contacts/operations";
 import { Button, DelIcon, Item, List, NavLinkStyled } from "components/ContactList/ContactList.styled";
 import { getFilteredContacts } from "redux/contacts/selectors";
-import { setSelectedContactId } from "redux/contacts/contactsSlice";
-
 
 export const ContactList = () => {
   const dispatch = useDispatch();

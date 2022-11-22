@@ -4,6 +4,7 @@ import { Button, FormStyled, Label,  FieldStyled,  ErrorMessageStyled } from './
 import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
 import { getContacts } from 'redux/contacts/selectors';
+import { toast } from 'react-toastify';
 
 const schema = yup.object().shape({
     name: yup.string().min(2, "Too Short!")
@@ -23,7 +24,7 @@ const initialValues = {
     number: '',
   }
   
-export const ContactForm = () => {
+export const ContactForm = ({ closeModal }) => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts)
 
@@ -32,11 +33,12 @@ export const ContactForm = () => {
     const nameExist = contacts.map(contact => contact.name.toLowerCase()).some(el => el === newName);
 
     if (nameExist) {
-       return alert(`${values.name} is already in contacts`);   
+       toast.error("A contact with that name already exists.");   
     }
-    console.log(values);
+  
     dispatch(addContact(values));
-    resetForm()
+    resetForm();
+    closeModal();
   };
 
 

@@ -1,5 +1,4 @@
-import { NavLink } from "react-router-dom"
-import { AuthNavLinkStyled } from "./AuthNav.styled"
+import { AuthNavLinkStyled } from "./AuthNav.styled";
 
 
 export const AuthNav = () => {
