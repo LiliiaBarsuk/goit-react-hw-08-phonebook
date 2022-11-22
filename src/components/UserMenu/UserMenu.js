@@ -8,14 +8,10 @@ export const UserMenu = () => {
     const user = useSelector(getUser);
     const dispatch = useDispatch();
 
-    const handleLogout = () => {
-        dispatch(logOut());
-      };
-
     return (
         <ContainerMenu>
             <p>{user.name}</p>
-            <Button onClick={handleLogout}>Log out</Button>
+            <Button onClick={() => dispatch(logOut())}>Log out</Button>
         </ContainerMenu>
     )
 }

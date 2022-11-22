@@ -1,12 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import { Layout } from "./Layout/Layout";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect, lazy } from "react";
 import { refreshUser } from "redux/auth/operations";
 import { PublicRoute } from "./PublicRoute";
 import { PrivatRoute } from "./PrivateRoute";
-import { getIsRefreshing } from "redux/auth/selectors";
-import { FallingLines } from "react-loader-spinner";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -18,7 +16,6 @@ const LogInPage= lazy(() => import('Pages/LoginPage/LogInPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
-  const isRefreshing = useSelector(getIsRefreshing);
 
   useEffect(() => {
     dispatch(refreshUser())
@@ -34,12 +31,7 @@ export const App = () => {
     }}
   >
     
-    {isRefreshing ? (<FallingLines 
-      color="#0824AF"
-      width="100"
-      visible={true}
-      ariaLabel='falling-lines-loading'
-  />) : 
+    
       <Routes>
         <Route path='/' element={<Layout/>}>
           <Route index element={<Home />} />
@@ -51,7 +43,7 @@ export const App = () => {
           <Route path="*" element={<Home />} />  
         </Route>
       
-    </Routes>}
+    </Routes>
     <ToastContainer />
     </div>
       
