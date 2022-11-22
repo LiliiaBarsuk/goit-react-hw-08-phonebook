@@ -2,8 +2,8 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { Button, FormStyled, Label,  FieldStyled,  ErrorMessageStyled } from './ContactForm.styled';
 import { useDispatch, useSelector } from "react-redux";
-import { addContact } from "../../redux/operations";
-import { getContacts } from 'redux/selectors';
+import { addContact } from "../../redux/contacts/operations";
+import { getContacts } from 'redux/contacts/selectors';
 
 const schema = yup.object().shape({
     name: yup.string().min(2, "Too Short!")

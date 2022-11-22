@@ -1,11 +1,19 @@
 import styled from '@emotion/styled';
 import { ErrorMessage, Field, Form } from 'formik';
 
+export const Container = styled.div`
+padding: 40px;
+height: 100vw;
+background: linear-gradient(90deg, rgba(32,142,221,1) 9%, rgba(88,192,243,0.9051995798319328) 37%, rgba(53,173,233,1) 79%);
+
+`;
+
 export const FormStyled = styled(Form)`
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 30%;
     gap: 20px;
+    margin: auto;
 `;
 
 export const Label = styled.label`
@@ -14,6 +22,8 @@ export const Label = styled.label`
     gap: 20px;
     font-size: 24px;
     font-weight: bold;
+    color: #0A0D68;
+
 `;
 
 

@@ -1,9 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit";
 
 export const getContacts = state => state.contacts.items;
-export const getFilter = state => state.filterValue;
+export const getFilter = state => state.contacts.filterValue;
 export const getIsLoading = state => state.contacts.isLoading;
 export const getError = state => state.contacts.error;
+export const getSelectedContactId = state => state.contacts.selectedContactId;
 
 export const getFilteredContacts = createSelector(
     [getContacts, getFilter], (contacts, filter) => {
@@ -13,4 +14,13 @@ export const getFilteredContacts = createSelector(
     }
     return contacts.filter(contact => contact.name.toLowerCase().includes(filter));
   
-})
+});
+
+export const getModalState = state => state.contacts.isModalOpen;
+
+export const getContactById = createSelector(
+  [getContacts, getSelectedContactId], (contacts, id) => {
+
+  return contacts.find(contact => contact.id === id);
+
+});
