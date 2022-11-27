@@ -39,7 +39,7 @@ export const App = () => {
           <Route index element={<Home />} />
           <Route path="/login" element={<PublicRoute  redirectTo="/contacts" component={<LogInPage />} />}/>
           <Route path="/register" element={<PublicRoute  redirectTo="/contacts" component={<RegistrationPage />} />}/>
-          <Route path="/contacts" element={<PrivatRoute  redirectTo="login" component={<ContactsPage />} />}>
+          <Route path="/contacts" element={<PrivatRoute  redirectTo="/login" component={<ContactsPage />} />}>
             <Route path=":id" element={<PrivatRoute  redirectTo="/login" component={<ContactDetails />} />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace={true} />} />  
