@@ -7,7 +7,7 @@ import { PublicRoute } from "./PublicRoute";
 import { PrivatRoute } from "./PrivateRoute";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getIsLoggedIn } from "redux/auth/selectors";
+import { getIsRefreshing } from "redux/auth/selectors";
 
 const Home= lazy(() => import('Pages/Home/Home'));
 const ContactDetails= lazy(() => import('Pages/ContactDetails/ContactDetails'));
@@ -22,10 +22,10 @@ export const App = () => {
     dispatch(refreshUser())
   }, [dispatch]); 
 
-  const isLoggedIn = useSelector(getIsLoggedIn);
+  const isRefreshing = useSelector(getIsRefreshing);
   
   let redirect = "/login";
-  if (isLoggedIn) {
+  if (isRefreshing) {
     redirect = "/contacts";
   }
 
