@@ -72,7 +72,7 @@ export const refreshUser = createAsyncThunk(
       const res = await axios.get('/users/current');
       return res.data;
     } catch (error) {
-      toast.error("Sorry! Check your data");
+      
       return thunkAPI.rejectWithValue(error.message);
     }
   }
